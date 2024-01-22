@@ -91,7 +91,6 @@ class ControllerNotification {
             const events = await response.json();
             const Anterior = this.obterUltimoElemento(events);
 
-
             if (Anterior != null) {
                 return `${this.EventType(Anterior.type)} a ${this.formatarDataHora(Anterior.eventTime)}`; //Anterior;
             }
@@ -103,7 +102,7 @@ class ControllerNotification {
         data.template = eventAtual.type;
         data.eventAnterior = await eventAnterior(eventAtual);
         data.eventAtual = `${this.EventType(eventAtual.type)} a ${this.formatarDataHora(eventAtual.eventTime)}`;
-        data.locazacao = (findPosition && `🛰️ Localização (Google Maps): https://www.google.com/maps/search/${findPosition[0].latitude},${findPosition[0].longitude}` || null);
+        data.locazacao = null;//(findPosition && `🛰️ Localização (Google Maps): https://www.google.com/maps/search/${findPosition[0].latitude},${findPosition[0].longitude}` || null);
 
         return await this.sednotification(data);
     }
@@ -261,8 +260,11 @@ class ControllerNotification {
     //
     async getNotication(req, res) {
         const temp = req.body;
+        const evento = temp.mensagem.split('||');
 
-        if (temp.mensagem.hasOwnProperty('event')) {
+        if (evento[0] == 'ENVTO') {
+            temp.mensagem = {event:evento[1]}
+
             temp.mensagem = await this.getEventoNotificantion(temp.mensagem);
         }
 

@@ -5,7 +5,7 @@ Configurção traccar
 
 <entry key='notificator.sms.manager.class'>org.traccar.sms.HttpSmsClient</entry>
 <entry key='sms.http.url'>http://localhost:8085/notification</entry>
-<entry key='sms.http.template'>{"numero": "{phone}","mensagem":{message}}</entry>
+<entry key='sms.http.template'>{"numero": "{phone}","mensagem":"{message}"}</entry>
 
 Edita os Temples de Notificação
 
@@ -16,4 +16,4 @@ Edita os Temples de Notificação
 
 com este script
 
-{"event": $event.id }
+ENVTO||$event.id||🛣️  #{if}($position.address)Endereço: $position.address#{end}
