@@ -102,7 +102,7 @@ class ControllerNotification {
         data.template = eventAtual.type;
         data.eventAnterior = await eventAnterior(eventAtual);
         data.eventAtual = `${this.EventType(eventAtual.type)} a ${this.formatarDataHora(eventAtual.eventTime)}`;
-        data.locazacao = null;//(findPosition && `🛰️ Localização (Google Maps): https://www.google.com/maps/search/${findPosition[0].latitude},${findPosition[0].longitude}` || null);
+        data.locazacao = data.end; //null;//(findPosition && `🛰️ Localização (Google Maps): https://www.google.com/maps/search/${findPosition[0].latitude},${findPosition[0].longitude}` || null);
 
         return await this.sednotification(data);
     }
@@ -233,8 +233,8 @@ class ControllerNotification {
                 'Authorization': `Bearer ${process.env.TOKEN_WPPCONNECT}`
             },
             body: JSON.stringify({
-                phone: `${data.numero}`,
-                message: `${data.mensagem}`
+                phone: `${data.phone}`,
+                message: `${data.message}`
             })
 
         });
@@ -260,12 +260,15 @@ class ControllerNotification {
     //
     async getNotication(req, res) {
         const temp = req.body;
-        const evento = temp.mensagem.split('||');
+        const evento = temp.message.split('||');
 
         if (evento[0] == 'ENVTO') {
-            temp.mensagem = {event:evento[1]}
+            temp.message = {
+                event:evento[1],
+                end:evento[2]
+            }
 
-            temp.mensagem = await this.getEventoNotificantion(temp.mensagem);
+            temp.message = await this.getEventoNotificantion(temp.message);
         }
 
         console.log(temp);
