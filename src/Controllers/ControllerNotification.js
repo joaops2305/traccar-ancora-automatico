@@ -98,7 +98,7 @@ class ControllerNotification {
             return null;
         }
 
-        data.name = `🚘  Veiculo: ${findDevice.name}`;
+        data.name = `🚘  Veículo: ${findDevice.name}`;
         data.template = eventAtual.type;
         data.eventAnterior = await eventAnterior(eventAtual);
         data.eventAtual = `${this.EventType(eventAtual.type)} a ${this.formatarDataHora(eventAtual.eventTime)}`;
@@ -262,6 +262,8 @@ class ControllerNotification {
         const temp = req.body;
         const evento = temp.message.split('||');
 
+        console.log(temp);
+
         if (evento[0] == 'ENVTO') {
             temp.message = {
                 event:evento[1],
@@ -269,7 +271,7 @@ class ControllerNotification {
             }
 
             temp.message = await this.getEventoNotificantion(temp.message);
-        }
+        }      
 
         console.log(temp);
 

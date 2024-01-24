@@ -102,7 +102,7 @@ class traccar {
 
         let Acora = {
             name: 'Ancora-Automatica',
-            area: `CIRCLE (${positionAtual[0].latitude} ${positionAtual[0].longitude}, 2)`,
+            area: `CIRCLE (${positionAtual[0].latitude} ${positionAtual[0].longitude}, 30)`,
         }
 
         const response = await fetch(`${process.env.HOST_TRACCAR}/api/geofences`, {
