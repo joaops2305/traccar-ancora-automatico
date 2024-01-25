@@ -225,16 +225,14 @@ class ControllerNotification {
 
     //
     async WhatsNotification(data) {
-        const response = await fetch(`${process.env.HOST_WPPCONNECT}`, {
+        const response = await fetch(`${process.env.HOST_WHATS_TRACCAR}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${process.env.TOKEN_WPPCONNECT}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                phone: `${data.phone}`,
-                message: `${data.message}`
+                numero: `${data.phone}`,
+                mensagem: `${data.message}`
             })
 
         });
