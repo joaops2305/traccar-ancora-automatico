@@ -22,7 +22,7 @@ class ControllerNotification {
                 break;
 
             case 'deviceStopped':
-                return '⚠️  Parou';
+                return '🛑 Parou';
                 break;
 
             case 'deviceOffline':
