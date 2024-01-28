@@ -159,7 +159,7 @@ class ControllerNotification {
         // Obtenha as partes da data e hora
         const dia = data.getDate().toString().padStart(2, '0');
         const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Note que os meses são zero-indexed
-        const ano = data.getFullYear();
+        const ano = data.getFullYear().toString().substr(-2);
         const horas = data.getHours().toString().padStart(2, '0');
         const minutos = data.getMinutes().toString().padStart(2, '0');
 
